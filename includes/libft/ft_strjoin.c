@@ -1,42 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vars.h                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/17 21:37:46 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/18 20:42:54 by soekim           ###   ########.fr       */
+/*   Created: 2020/11/10 14:44:51 by soekim            #+#    #+#             */
+/*   Updated: 2021/06/18 22:57:39 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VARS_H
-# define VARS_H
+#include "libft.h"
 
-# define P_TO_C	0
-# define C_TO_P	1
-
-# define READ	0
-# define WRITE	1
-
-struct	s_arg
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		cnt;
-	char	**vec;
-};
-typedef struct	s_arg	t_arg;
+	char	*ret;
+	char	*join;
 
-struct	s_file
-{
-	int		fd;
-	int		o_flag;
-};
-typedef struct	s_file	t_file;
-
-struct	s_inout
-{
-	t_file	in;
-	t_file	out;
-};
-typedef struct s_inout	t_inout;
-
+	if (!(join = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
+		return ((void *)0);
+	ret = join;
+	if (s1)
+	{
+		while (*s1)
+		{
+			*join = *s1;
+			join++;
+			s1++;
+		}
+	}
+	if (s2)
+	{
+		while (*s2)
+		{
+			*join = *s2;
+			join++;
+			s2++;
+		}
+	}
+	*join = '\0';
+	return (ret);
+}

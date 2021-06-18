@@ -1,42 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vars.h                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/17 21:37:46 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/18 20:42:54 by soekim           ###   ########.fr       */
+/*   Created: 2020/11/10 14:44:51 by soekim            #+#    #+#             */
+/*   Updated: 2020/11/22 18:25:51 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VARS_H
-# define VARS_H
+#include "libft.h"
 
-# define P_TO_C	0
-# define C_TO_P	1
-
-# define READ	0
-# define WRITE	1
-
-struct	s_arg
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int		cnt;
-	char	**vec;
-};
-typedef struct	s_arg	t_arg;
+	int				i;
+	unsigned char	*c1;
+	unsigned char	*c2;
 
-struct	s_file
-{
-	int		fd;
-	int		o_flag;
-};
-typedef struct	s_file	t_file;
-
-struct	s_inout
-{
-	t_file	in;
-	t_file	out;
-};
-typedef struct s_inout	t_inout;
-
+	i = (int)n;
+	c1 = (unsigned char *)s1;
+	c2 = (unsigned char *)s2;
+	while (--i >= 0 && *c1 == *c2 && *c1 != '\0' && *c2 != '\0')
+	{
+		c1++;
+		c2++;
+	}
+	if (i < 0)
+		return (0);
+	return ((int)(*c1 - *c2));
+}

@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vars.h                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/17 21:37:46 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/18 20:42:54 by soekim           ###   ########.fr       */
+/*   Created: 2020/11/09 16:51:49 by soekim            #+#    #+#             */
+/*   Updated: 2020/11/19 16:42:17 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VARS_H
-# define VARS_H
+#include "libft.h"
 
-# define P_TO_C	0
-# define C_TO_P	1
-
-# define READ	0
-# define WRITE	1
-
-struct	s_arg
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	int		cnt;
-	char	**vec;
-};
-typedef struct	s_arg	t_arg;
+	char	*dst_tab;
+	char	*src_tab;
+	int		i;
 
-struct	s_file
-{
-	int		fd;
-	int		o_flag;
-};
-typedef struct	s_file	t_file;
-
-struct	s_inout
-{
-	t_file	in;
-	t_file	out;
-};
-typedef struct s_inout	t_inout;
-
+	if (!dst && !src)
+		return ((void *)0);
+	i = (int)n;
+	dst_tab = (char *)dst;
+	src_tab = (char *)src;
+	while (--i >= 0)
+		dst_tab[i] = src_tab[i];
+	return (dst);
+}

@@ -1,42 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vars.h                                             :+:      :+:    :+:   */
+/*   is_element.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/17 21:37:46 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/18 20:42:54 by soekim           ###   ########.fr       */
+/*   Created: 2021/06/16 11:19:36 by soekim            #+#    #+#             */
+/*   Updated: 2021/06/16 11:19:39 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VARS_H
-# define VARS_H
+#include "libft.h"
 
-# define P_TO_C	0
-# define C_TO_P	1
-
-# define READ	0
-# define WRITE	1
-
-struct	s_arg
+int		is_element(const char *set, char c)
 {
-	int		cnt;
-	char	**vec;
-};
-typedef struct	s_arg	t_arg;
-
-struct	s_file
-{
-	int		fd;
-	int		o_flag;
-};
-typedef struct	s_file	t_file;
-
-struct	s_inout
-{
-	t_file	in;
-	t_file	out;
-};
-typedef struct s_inout	t_inout;
-
+	if (!set)
+		return (-1);
+	while (*set)
+	{
+		if (*set == c)
+			return (1);
+		set++;
+	}
+	return (0);
+}

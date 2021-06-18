@@ -2,5 +2,4 @@
 .*.swp
 .*.swo
 .DS_store
-test.c
 a.out

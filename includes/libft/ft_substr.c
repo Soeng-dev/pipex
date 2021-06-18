@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vars.h                                             :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/17 21:37:46 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/18 20:42:54 by soekim           ###   ########.fr       */
+/*   Created: 2020/11/10 14:44:51 by soekim            #+#    #+#             */
+/*   Updated: 2020/11/24 00:20:41 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VARS_H
-# define VARS_H
+#include "libft.h"
 
-# define P_TO_C	0
-# define C_TO_P	1
-
-# define READ	0
-# define WRITE	1
-
-struct	s_arg
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int		cnt;
-	char	**vec;
-};
-typedef struct	s_arg	t_arg;
+	char	*sub;
+	int		i;
 
-struct	s_file
-{
-	int		fd;
-	int		o_flag;
-};
-typedef struct	s_file	t_file;
-
-struct	s_inout
-{
-	t_file	in;
-	t_file	out;
-};
-typedef struct s_inout	t_inout;
-
+	if (!s)
+		return (0);
+	i = ft_strlen(s);
+	if ((int)start >= i)
+		i = 0;
+	else if ((int)start + (int)len >= i)
+		i -= ((int)start);
+	else
+		i = (int)len;
+	if (!(sub = (char *)malloc(i + 1)))
+		return ((void *)0);
+	sub[i] = '\0';
+	while (i-- > 0)
+		sub[i] = s[(int)start + i];
+	return (sub);
+}

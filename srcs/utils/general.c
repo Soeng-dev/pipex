@@ -1,42 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vars.h                                             :+:      :+:    :+:   */
+/*   general.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/17 21:37:46 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/18 20:42:54 by soekim           ###   ########.fr       */
+/*   Created: 2021/06/18 18:12:16 by soekim            #+#    #+#             */
+/*   Updated: 2021/06/18 18:20:09 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VARS_H
-# define VARS_H
+#include "../../includes/utils.h"
 
-# define P_TO_C	0
-# define C_TO_P	1
-
-# define READ	0
-# define WRITE	1
-
-struct	s_arg
+int		strdelcpy(char *s1, char *s2, int del)
 {
-	int		cnt;
-	char	**vec;
-};
-typedef struct	s_arg	t_arg;
+	while (*s1 && *s2 && *s1 != del, *s2 != del)
+	{
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+	}
+	if (*s1 == del || *s2 == del)
+		return (0);
+	else
+		return (*s1 - *s2);
+}
 
-struct	s_file
+int		open_file(char *name, int mode)
 {
 	int		fd;
-	int		o_flag;
-};
-typedef struct	s_file	t_file;
 
-struct	s_inout
-{
-	t_file	in;
-	t_file	out;
-};
-typedef struct s_inout	t_inout;
-
+	if (!name)
+		return (-1);
+	fd = open(name, O_RDONLY);
+	if (fd < 0)
+		exit(0);
+	return (fd);
+}
