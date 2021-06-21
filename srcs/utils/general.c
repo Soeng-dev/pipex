@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 18:12:16 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/18 18:20:09 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/21 22:23:49 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,19 @@ int		open_file(char *name, int mode)
 	if (fd < 0)
 		exit(0);
 	return (fd);
+}
+
+void	free_double(char **ptr)
+{
+	char	**iter;
+
+	iter = ptr;
+	while (iter)
+	{
+		if (*iter)
+			free(*iter);
+		++iter;
+	}
+	free(ptr);
+	return ;
 }
