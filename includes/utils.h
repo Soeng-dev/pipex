@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 19:43:55 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/18 23:08:51 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/21 22:23:55 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 */
 int		strdelcpy(char *s1, char *s2, int del);
 int		open_file(char *name, int mode);
+void	free_double(char **ptr);
 
 /*
 **		adhoc

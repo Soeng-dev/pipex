@@ -6,41 +6,57 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 22:56:55 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/21 23:11:33 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/22 20:39:56 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipe.h"
 
-void	init_pipe(int **data)
+void	init_pipe(int *pipeline, int input_fd)
 {
-	if (pipe(data[P_TO_C]) < 0)
-		perror_exit("Error : pipe from parent to children");
-	if (pipe(data[C_TO_P]) < 0)
-		perror_exit("Error : pipe from children to parent");
+
+	if (pipe(pipeline) < 0)
+		perror_exit("Error : pipe");
+	transfer_data(inout->in.fd, pipeline[P_WRITE]);
 	return ;
 }
 
-void	pipex(t_arg *arg, char **envp, int **data)
+void	pipex(t_arg *arg, char **envp, t_inout *inout)
 {
 	int		i;
-	int		pid;
+	int		pipeline[2];
 
-	i = 2;
-	while (i < arg->cnt)
+	init_pipe(pipeline, inout->in.fd);
+	i = 1;
+	while (i < arg->cnt - 1)
 	{
-		pid = fork();
-		if (pid < 0)
-			perror_exit("Error : fork");
-		if (pid == CHILD)
-		{
-			exec_cmd();
-		}
-		else
-		{
-			waitpid(CHILD);
-			
-		}
+		exec_cmd(arg->vec[i], envp, pipeline);
+		transfer_data(pipeline[P_READ], pipeline[P_WRITE]);
+		++i;
 	}
+	
 	return ;
 }
+
+void	exec_cmd(char *cmd, char **envp, int *pipeline)
+{
+	int		pid;
+	int		status;
+	char	*path;
+	char	**cmd_arg;
+
+	pid = fork();
+	if (pid < 0)
+		perrror_exit("Error : fork");
+	if (pid == CHILD)
+	{
+		path = find_cmdpath(cmd, envp);
+		cmd_arg = read_cmd_arg(pipeline[C_READ]);
+		dup2(pipeline[C_WRITE], STDOUT);
+		execve(path, cmd_arg, NULL);
+	}
+	else
+		waitpid(CHILD, &status, 0);
+	return ;
+}
+

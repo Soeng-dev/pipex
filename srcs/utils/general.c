@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 18:12:16 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/21 22:23:49 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/22 17:51:26 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,20 @@ void	free_double(char **ptr)
 		++iter;
 	}
 	free(ptr);
+	return ;
+}
+
+void	transfer_data(int fd_src, int fd_target)
+{
+	char	line[33];
+	int		read_result;
+
+	line[32] = 0;
+	read_result = 1;
+	while (read_result != 0)
+	{
+		read_result = read(fd_src, line, 32);
+		ft_putstr_fd(line, fd_target);
+	}
 	return ;
 }

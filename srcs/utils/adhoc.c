@@ -6,26 +6,12 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:37:02 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/21 23:39:02 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/22 16:15:25 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils.h"
 
-int		target_in_path(char *target, char *path)
-{
-	int		pid;
-	int		data[2][2];
-	char	*ls_arg[3];
-
-	init_pipe(data);
-	ls_arg[0] = ft_strdup("ls");
-	ls_arg[1] = path;
-	ls_arg[2] = NULL;
-	exec_ls(ls_arg, data);
-	data[P_TO_C][SEND] = data[C_TO_P][SEND];
-	
-}
 char	*find_cmdpath(char *cmd, char **envp)
 {
 	char	**path_list;

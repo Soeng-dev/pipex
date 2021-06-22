@@ -6,18 +6,20 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 21:37:46 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/18 20:42:54 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/22 17:25:00 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VARS_H
 # define VARS_H
 
-# define P_TO_C	0
-# define C_TO_P	1
+# define C_READ		0
+# define C_WRITE	1
 
-# define READ	0
-# define WRITE	1
+# define P_READ		1
+# define P_WRITE	0
+
+# define STDOUT		1
 
 struct	s_arg
 {
@@ -40,3 +42,4 @@ struct	s_inout
 };
 typedef struct s_inout	t_inout;
 
+#endif
