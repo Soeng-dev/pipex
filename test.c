@@ -50,11 +50,9 @@ int		main(int argc, char **argv)//, char **envp)
 //don't know how to use dup2 and pipe
 
 	int		status;
-	int		ptoc[2];
-	int		ctop[2];
+	int		pipeline[2];
 
-	pipe(ptoc);
-	pipe(ctop);
+	pipe(pipeline);
 	int		pid = fork();
 	if (pid == 0)
 	{
@@ -67,20 +65,20 @@ int		main(int argc, char **argv)//, char **envp)
 		write(1, "child\n", 6);
 		write(1, arr, 100);
 
-		write(ctop[WR], arr, 100);
+		write(pipeline[WR], arr, 100);
 		write(1, "\nwrited\n", 8);
 		return (0);
 	}
 	char	hi[101];
 
 	waitpid(0, &status, 0);
-	read(ctop[RD], hi, 100);
+	read(pipeline[RD], hi, 100);
 
 	hi[100] = 0;
 	write(1, "\nparent\n", 8);
 	write(1, hi, 100);
 
-	write(ptoc[WR], hi, 100);
+	write(pipeline[WR], hi, 100);
 
 	pid = fork();
 	if (pid == 0)
@@ -88,18 +86,18 @@ int		main(int argc, char **argv)//, char **envp)
 		char	arr[101];
 
 		write(1, "\nchild2\n", 8);
-		read(ptoc[RD], arr, 100);
+		read(pipeline[RD], arr, 100);
 		write(1, arr, 100);
 
 		int		fd = open("./bye", O_RDWR);
 
 		read(fd, arr, 100);
-		write(ctop[WR], arr, 100);
+		write(pipeline[WR], arr, 100);
 		return (0);
 	}
 	waitpid(0, &status, 0);
 
-	read(ctop[RD], hi, 100);
+	read(pipeline[RD], hi, 100);
 	hi[100] = 0;
 	write(1, "\nparent\n", 8);
 	write(1, hi, 100);
