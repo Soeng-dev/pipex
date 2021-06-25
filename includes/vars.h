@@ -13,13 +13,10 @@
 #ifndef VARS_H
 # define VARS_H
 
-# define C_READ		0
-# define C_WRITE	1
+# define RD		0
+# define WR		1
 
-# define P_READ		1
-# define P_WRITE	0
-
-# define STDOUT		1
+# define STDOUT	1
 
 struct	s_arg
 {

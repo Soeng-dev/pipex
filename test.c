@@ -4,12 +4,13 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #include "includes/vars.h"
 
 int		main(int argc, char **argv)//, char **envp)
 {
-
 //	// test for pid when multi-forked
 //	int pid = fork();
 //
@@ -44,49 +45,64 @@ int		main(int argc, char **argv)//, char **envp)
 //	execve("/bin/ls", cmd_argv, NULL);
 //
 //	need to do pipe test, if child exited fd in pipe function remains
-	
 
-	//don't know how to use dup2 and pipe
+
+//don't know how to use dup2 and pipe
+
+	int		status;
+	int		ptoc[2];
+	int		ctop[2];
+
+	pipe(ptoc);
+	pipe(ctop);
 	int		pid = fork();
-	int		pipeline[2];
-	pipe(pipeline);
 	if (pid == 0)
 	{
 		int fd = open("./hi", O_RDWR);
 		char arr[101];
+
 		arr[100] = 0;
 		read(fd, arr, 100);
-		printf("child : %s\n", arr);
-		close(pipeline[C_READ]);
-		write(pipeline[C_WRITE], arr, 100);
+
+		write(1, "child\n", 6);
+		write(1, arr, 100);
+
+		write(ctop[WR], arr, 100);
+		write(1, "\nwrited\n", 8);
 		return (0);
 	}
-
-	int status;
-	waitpid(0, &status, 0);
 	char	hi[101];
-	read(pipeline[P_READ], hi, 100);
+
+	waitpid(0, &status, 0);
+	read(ctop[RD], hi, 100);
 
 	hi[100] = 0;
-	printf("\n here : %s\n", hi);
-	
+	write(1, "\nparent\n", 8);
+	write(1, hi, 100);
+
+	write(ptoc[WR], hi, 100);
+
 	pid = fork();
 	if (pid == 0)
 	{
-		int fd = open("./bye", O_RDWR);
-		char arr[101];
+		char	arr[101];
+
+		write(1, "\nchild2\n", 8);
+		read(ptoc[RD], arr, 100);
+		write(1, arr, 100);
+
+		int		fd = open("./bye", O_RDWR);
 
 		read(fd, arr, 100);
-		dup2(fd, pipeline[C_WRITE]);
-
-		write(1, arr, 100);
+		write(ctop[WR], arr, 100);
 		return (0);
 	}
 	waitpid(0, &status, 0);
 
-	read(pipeline[P_READ], hi, 100);
+	read(ctop[RD], hi, 100);
 	hi[100] = 0;
-	printf("%s\n", hi);
-	
+	write(1, "\nparent\n", 8);
+	write(1, hi, 100);
 
+	return (0);
 }
