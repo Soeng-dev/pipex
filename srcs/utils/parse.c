@@ -12,10 +12,14 @@
 
 #include "../../includes/parse.h"
 
+int		is_correct_path(char *path, char *cmd)
+{
+}
+
 char	*find_cmdpath(char *cmd, char **envp)
 {
 	char	**path_list;
-	char	**iter;
+	char	**to_free;
 	char	*path;
 
 	while (*envp)
@@ -24,15 +28,15 @@ char	*find_cmdpath(char *cmd, char **envp)
 			break;
 	}
 	path_list = ft_split(*envp + 5, ':');
-	iter = path_list;
-	while (iter)
+	to_free = path_list;
+	while (path_list)
 	{
-		
-		++iter;
+		if (is_correct_path(*path_list, cmd))
+			path = *path_list;
+		++path_list;
 	}
 	path = ft_strdup(iter);
-	free_double(path_list);
-	
+	free_double(to_free);
 }
 
 char	**read_cmd_arg(int fd)
