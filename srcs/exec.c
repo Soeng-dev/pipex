@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipe.h"
+#include "../includes/exec.h"
 
 void	init_pipe(int *pipeline, int input_fd)
 {
@@ -21,7 +21,7 @@ void	init_pipe(int *pipeline, int input_fd)
 	return ;
 }
 
-void	pipex(t_arg *arg, char **envp, t_inout *inout)
+void	exec_arg(t_arg *arg, char **envp, t_inout *inout)
 {
 	int		i;
 	int		pipeline[2];
@@ -31,10 +31,10 @@ void	pipex(t_arg *arg, char **envp, t_inout *inout)
 	while (i < arg->cnt - 1)
 	{
 		exec_cmd(arg->vec[i], envp, pipeline);
-		transfer_data(pipeline[P_READ], pipeline[P_WRITE]);
+		transfer_data(pipeline[RD], pipeline[WR]);
 		++i;
 	}
-	
+	transfer_data(pipeline[RD], inout->out.fd);
 	return ;
 }
 
@@ -52,7 +52,7 @@ void	exec_cmd(char *cmd, char **envp, int *pipeline)
 	{
 		path = find_cmdpath(cmd, envp);
 		cmd_arg = read_cmd_arg(pipeline[C_READ]);
-		dup2(pipeline[C_WRITE], STDOUT);
+		dup2(pipeline[WR], STDOUT);
 		execve(path, cmd_arg, NULL);
 	}
 	else

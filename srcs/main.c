@@ -32,7 +32,7 @@ int		main(int argc, char **argv, char **envp)
 	
 	init_inout(&inout, &arg);
 
-	pipex(&arg, envp, &inout);
+	exec_arg(&arg, envp, &inout);
 
 	//redirection result of pipex and exec_cmd to the out.fd
 	close(inout.out.fd);
