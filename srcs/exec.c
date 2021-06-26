@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 22:56:55 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/26 19:55:09 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/26 20:27:02 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	exec_arg(t_arg *arg, char **envp, t_inout *inout)
 	i = 1;
 	while (i < num_of_cmd)
 	{
+		ft_putstr_fd("hi\n", 1);
 		exec_cmd(arg->vec[i], envp, pipeline);
 		transfer_data(pipeline[RD], pipeline[WR]);
 		++i;
@@ -40,7 +41,6 @@ void	exec_arg(t_arg *arg, char **envp, t_inout *inout)
 void	exec_cmd(char *cmd, char **envp, int *pipeline)
 {
 	int		pid;
-	int		status;
 	char	*path;
 	char	**cmd_arg;
 
@@ -50,10 +50,12 @@ void	exec_cmd(char *cmd, char **envp, int *pipeline)
 	if (pid == CHILD)
 	{
 		path = find_cmdpath(cmd, envp);
+
+		ft_putstr_fd("path fin\n", 1);//test
 		cmd_arg = read_cmd_arg(pipeline[RD]);
 		dup2(pipeline[WR], STDOUT);
 		execve(path, cmd_arg, NULL);
 	}
-	waitpid(CHILD, &status, 0);
+	waitpid(CHILD, NULL, 0);
 	return ;
 }

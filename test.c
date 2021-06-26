@@ -10,7 +10,7 @@
 #include "includes/vars.h"
 #include "includes/get_next_line.h"
 
-int		main(int argc, char **argv)//, char **envp)
+int		main(int argc, char **argv, char **envp)
 {
 //	// test for pid when multi-forked
 //	int pid = fork();
@@ -103,10 +103,17 @@ int		main(int argc, char **argv)//, char **envp)
 //	write(1, "\nparent\n", 8);
 //	write(1, hi, 100);
 	
-	char *ho;
-	int fd = open("./end", O_RDWR);
-	get_next_line(fd, &ho);
-	printf("ft_strlen %d, cont :%s\n", ft_strlen(ho), ho);
-	free(ho);
+//	char *ho;
+//	int fd = open("./end", O_RDWR);
+//	get_next_line(fd, &ho);
+//	printf("ft_strlen %d, cont :%s\n", ft_strlen(ho), ho);
+//	free(ho);
+
+	char *arg[4];
+	arg[0] = "./srcs/utils/ls_grep.sh";
+	arg[1] = "./";
+	arg[2] = "i";
+	arg[3] = NULL;
+	execve("srcs/utils/ls_grep.sh", arg, NULL);
 	return (0);
 }
