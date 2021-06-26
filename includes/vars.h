@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 21:37:46 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/22 17:25:00 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/26 17:39:49 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,13 @@
 
 # define RD		0
 # define WR		1
-
 # define STDOUT	1
+# define CHILD	0
+
+# define TRUE	1
+# define FALSE	0
+
+# include "libft/libft.h"
 
 struct	s_arg
 {

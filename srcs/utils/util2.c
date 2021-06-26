@@ -1,54 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   general.c                                          :+:      :+:    :+:   */
+/*   util1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/18 18:12:16 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/22 17:51:26 by soekim           ###   ########.fr       */
+/*   Created: 2021/06/26 20:02:56 by soekim            #+#    #+#             */
+/*   Updated: 2021/06/26 20:03:59 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils.h"
 
-int		strdelcpy(char *s1, char *s2, int del)
+void	free_char_ptrarr(char **ptrarr)
 {
-	while (*s1 && *s2 && *s1 != del, *s2 != del)
+	while (*ptrarr)
 	{
-		if (*s1 != *s2)
-			return (*s1 - *s2);
+		free(*ptrarr);
+		++ptrarr;
 	}
-	if (*s1 == del || *s2 == del)
-		return (0);
-	else
-		return (*s1 - *s2);
+	return ;
 }
 
-int		open_file(char *name, int mode)
+void	free_char_ptr2d(char **ptr2d)
 {
-	int		fd;
-
-	if (!name)
-		return (-1);
-	fd = open(name, O_RDONLY);
-	if (fd < 0)
-		exit(0);
-	return (fd);
-}
-
-void	free_double(char **ptr)
-{
-	char	**iter;
-
-	iter = ptr;
-	while (iter)
-	{
-		if (*iter)
-			free(*iter);
-		++iter;
-	}
-	free(ptr);
+	free_char_ptrarr(ptr2d);
+	free(ptr2d);
 	return ;
 }
 

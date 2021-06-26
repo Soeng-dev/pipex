@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.c                                             :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 22:56:55 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/22 20:39:56 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/26 19:55:09 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/exec.h"
-
-void	init_pipe(int *pipeline, int input_fd)
-{
-
-	if (pipe(pipeline) < 0)
-		perror_exit("Error : pipe");
-	if (input_fd >= 0)
-			transfer_data(input_fd, pipeline[P_WRITE]);
-	return ;
-}
 
 void	exec_arg(t_arg *arg, char **envp, t_inout *inout)
 {
@@ -56,16 +46,14 @@ void	exec_cmd(char *cmd, char **envp, int *pipeline)
 
 	pid = fork();
 	if (pid < 0)
-		perrror_exit("Error : fork");
+		perror_exit("Error : fork");
 	if (pid == CHILD)
 	{
 		path = find_cmdpath(cmd, envp);
-		cmd_arg = read_cmd_arg(pipeline[C_READ]);
+		cmd_arg = read_cmd_arg(pipeline[RD]);
 		dup2(pipeline[WR], STDOUT);
 		execve(path, cmd_arg, NULL);
 	}
-	else
-		waitpid(CHILD, &status, 0);
+	waitpid(CHILD, &status, 0);
 	return ;
 }
-

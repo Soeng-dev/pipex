@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/18 19:43:55 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/26 20:10:51 by soekim           ###   ########.fr       */
+/*   Created: 2021/06/26 16:45:13 by soekim            #+#    #+#             */
+/*   Updated: 2021/06/26 17:42:25 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef EXEC_H
+# define EXEC_H
 
-# include <stdlib.h>
-# include <fcntl.h>
+# include <unistd.h>
 
 # include "vars.h"
-# include "libft/libft.h"
-# include "get_next_line.h"
+# include "utils.h"
+# include "parse.h"
 
-int		strdelcpy(char *s1, char *s2, int del);
-int		open_file(char *name, int mode);
-void	free_char_ptrarr(char **ptrarr);
-void	free_char_ptr2d(char **ptr2d);
-void	transfer_data(int fd_src, int fd_target);
-void	perror_exit(char *str);
-void	init_pipe(int *pipeline, int input_fd);
+void	exec_arg(t_arg *arg, char **envp, t_inout *inout);
+void	exec_cmd(char *cmd, char **envp, int *pipeline);
 
 #endif

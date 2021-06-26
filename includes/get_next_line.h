@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:32:19 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/18 22:38:16 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/26 17:10:01 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
-# define ERROR		-1
-# define END		0
-# define SUCCESS	1
+# define ERROR			-1
+# define END			0
+# define SUCCESS		1
+# define BUFFER_SIZE	32
 
 size_t	ft_strlen(const char *s);
 char	*ft_strcpy(char *dst, const char *src);
 int		strdel_len(char *s, char delimiter);
 int		strcat_del(char **line, char *to_catenate, char delimiter);
 int		min(int a, int b);
-void	*ft_memmove(void *dst, const void *src, int len);
 int		get_oneline_and_next(char **next, char *buffer, char **temp, int fd);
 int		get_next_line(int fd, char **line);
 #endif

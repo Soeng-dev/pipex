@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/21 23:09:21 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/21 23:10:13 by soekim           ###   ########.fr       */
+/*   Created: 2021/06/26 17:34:41 by soekim            #+#    #+#             */
+/*   Updated: 2021/06/26 17:36:32 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/error.h"
+#ifndef PARSE_H
+# define PARSE_H
 
-void	perror_exit(char *str)
-{
-	perror(str);
-	exit(1);
-}
+# include "utils.h"
+
+void	ls_grep_sh(char *path, char *cmd, int *pipeline);
+int		is_correct_path(char *path, char *cmd);
+char	*find_cmdpath(char *cmd, char **envp);
+char	**read_cmd_arg(int fd);
+
+#endif
