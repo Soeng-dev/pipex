@@ -9,6 +9,7 @@
 
 #include "includes/vars.h"
 #include "includes/get_next_line.h"
+#include "includes/libft/libft.h"
 
 int		main(int argc, char **argv, char **envp)
 {
@@ -109,11 +110,15 @@ int		main(int argc, char **argv, char **envp)
 //	printf("ft_strlen %d, cont :%s\n", ft_strlen(ho), ho);
 //	free(ho);
 
-	char *arg[4];
-	arg[0] = "./srcs/utils/ls_grep.sh";
-	arg[1] = "./";
-	arg[2] = "i";
-	arg[3] = NULL;
-	execve("srcs/utils/ls_grep.sh", arg, NULL);
+//	char *arg[4];
+//	arg[0] = "./srcs/utils/ls_grep.sh";
+//	arg[1] = "./";
+//	arg[2] = "i";
+//	arg[3] = NULL;
+//	execve("srcs/utils/ls_grep.sh", arg, NULL);
+
+	char *pre = NULL;
+	char *post = "abcd";
+	char *joined=ft_strjoin(pre, post);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:37:02 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/28 21:31:12 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/28 22:02:49 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,16 @@ char	**read_cmd_arg(int fd)
 	char	*input;
 	char	**cmd_arg;
 
+	input = NULL;
 	while (1)
 	{
 		new = NULL;
 		if (get_next_line(fd, &new) == END)
 			break;
+		ft_putnbr_fd(ft_strlen(new), 1);
 		input = ft_strjoin(input, new);
+//		ft_putstr_fd("input : ",1 );
+//		ft_putendl_fd(input, 1);//test
 		old = input;
 		free(old);
 		free(new);
