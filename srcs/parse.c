@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:37:02 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/28 17:47:55 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/28 21:31:12 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	ls_grep_sh(char *path, char *cmd)
 		arg[1] = path;
 		arg[2] = cmd;
 		arg[3] = NULL;
-		for (int i = 0; i < 3; ++i)
-			ft_putendl_fd(arg[i], 1);
 		execve("ls_grep.sh", arg, NULL);
 	}
 	waitpid(CHILD, NULL, 0);
@@ -71,16 +69,12 @@ char	*find_cmdpath(char *cmd, char **envp)
 	}
 	path_list = ft_split(*envp + 5, ':');
 	to_free = path_list;
-	while (path_list)
+	while (*path_list)
 	{
-		ft_putstr_fd("bf check\n", 1);
 		if (is_correct_path(*path_list, cmd))
-			path = *path_list;
-		ft_putstr_fd("aft check\n", 1);
+			break;
 		++path_list;
 	}
-
-
 	path = ft_strdup(*path_list);
 	free_char_ptr2d(to_free);
 	return (path);

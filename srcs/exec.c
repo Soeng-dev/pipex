@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 22:56:55 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/26 20:27:02 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/28 21:29:31 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,19 @@
 void	exec_arg(t_arg *arg, char **envp, t_inout *inout)
 {
 	int		i;
-	int		num_of_cmd;
+	int		last_cmd;
 	int		pipeline[2];
 
-	if (arg->cnt - 1 == 2 && arg->cnt - 1 == 3)
-		num_of_cmd = arg->cnt - 1;
-	else if (arg->cnt - 1 >= 4)
-		num_of_cmd = arg->cnt - 2;
+	if (arg->cnt == 3 || arg->cnt == 4)
+		last_cmd = arg->cnt;
+	else if (arg->cnt >= 5)
+		last_cmd = arg->cnt - 1;
 	else
 		return ;
 	init_pipe(pipeline, inout->in.fd);
-	i = 1;
-	while (i < num_of_cmd)
+	i = 2;
+	while (i < last_cmd)
 	{
-		ft_putstr_fd("hi\n", 1);
 		exec_cmd(arg->vec[i], envp, pipeline);
 		transfer_data(pipeline[RD], pipeline[WR]);
 		++i;
