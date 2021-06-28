@@ -6,53 +6,54 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:37:02 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/26 20:48:40 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/28 17:47:55 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parse.h"
 
-void	ls_grep_sh(char *path, char *cmd, int *pipeline)
+void	ls_grep_sh(char *path, char *cmd)
 {
 	char	*arg[4];
+	int		pid;
 
-	arg[0] = "./ls_grep.sh";
-	arg[1] = path;
-	arg[2] = cmd;
-	arg[3] = NULL;
-	dup2(pipeline[WR], STDOUT);
-	execve("ls_grep.sh", arg, NULL);
+	pid = fork();
+	if (pid == CHILD)
+	{
+		arg[0] = "./ls_grep.sh";
+		arg[1] = path;
+		arg[2] = cmd;
+		arg[3] = NULL;
+		for (int i = 0; i < 3; ++i)
+			ft_putendl_fd(arg[i], 1);
+		execve("ls_grep.sh", arg, NULL);
+	}
+	waitpid(CHILD, NULL, 0);
 	return ;
 }
 
 int		is_correct_path(char *path, char *cmd)
 {
-	int		pipeline[2];
-	int		pid;
 	int		gnl_result;
 	char	*grepped;
+	int		fd;
 
-	init_pipe(pipeline, -1);
-	write(pipeline[WR], cmd, ft_strlen(cmd));
-	pid = fork();
-	if (pid == CHILD)
-	{
-		ls_grep_sh(path, cmd, pipeline);
-		exit (0);
-	}
-	waitpid(CHILD, NULL, 0);
+	ls_grep_sh(path, cmd);
+	fd = open("./grepped", O_RDONLY);
 	gnl_result = SUCCESS;
-	while (gnl_result != END || gnl_result != ERROR)
+	while (gnl_result == SUCCESS)
 	{
 	//test here
-		gnl_result = get_next_line(pipeline[RD], &grepped);
+		gnl_result = get_next_line(fd, &grepped);
 		if (!ft_strcmp(grepped, cmd))
 		{
 			free(grepped);
+			close(fd);
 			return (TRUE);
 		}
 		free(grepped);
 	}
+	close(fd);
 	return (FALSE);
 }
 
@@ -72,8 +73,10 @@ char	*find_cmdpath(char *cmd, char **envp)
 	to_free = path_list;
 	while (path_list)
 	{
+		ft_putstr_fd("bf check\n", 1);
 		if (is_correct_path(*path_list, cmd))
 			path = *path_list;
+		ft_putstr_fd("aft check\n", 1);
 		++path_list;
 	}
 
