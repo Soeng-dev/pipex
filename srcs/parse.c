@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:37:02 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/29 18:21:55 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/29 20:47:58 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ char	**read_cmd_arg(int fd)
 	joined = NULL;
 	while (rdlen > 0)
 	{
+
+	ft_putstr_fd("started\n",1 );
 		rdlen = read(fd, buf, 255);
 		buf[rdlen] = 0;
 		joined = ft_strjoin(joined, buf);

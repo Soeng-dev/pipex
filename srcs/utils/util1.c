@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 18:12:16 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/29 20:45:11 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/29 20:51:15 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ void	init_pipe(int (*pipes)[2], int input_fd)
 		perror_exit("Error : pipe");
 	if (input_fd >= 0)
 		transfer_data(input_fd, pipes[PTOC][WR]);
+	close(pipes[PTOC][RD]);
+	close(pipes[CTOP][WR]);
 	return ;
 }
