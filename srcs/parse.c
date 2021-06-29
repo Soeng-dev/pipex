@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:37:02 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/29 16:48:36 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/29 18:21:55 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,24 +85,23 @@ char	*find_cmdpath(char *cmd, char **envp)
 
 char	**read_cmd_arg(int fd)
 {
-	char	*new;
-	char	*old;
-	char	*input;
+	char	buf[256];
 	char	**cmd_arg;
+	char	*joined;
+	int		rdlen;
 
-	input = NULL;
-	while (1)
+	buf[255] = 0;
+	rdlen = 1;
+	joined = NULL;
+	while (rdlen > 0)
 	{
-		new = NULL;
-		if (get_next_line(fd, &new) == END)
-			break;
-		input = ft_strjoin(input, new);
-		ft_putstr_fd("input : ",1 );
-		ft_putendl_fd(input, 1);//test
-		old = input;
-		free(old);
-		free(new);
+		rdlen = read(fd, buf, 255);
+		buf[rdlen] = 0;
+		joined = ft_strjoin(joined, buf);
 	}
-	cmd_arg = ft_split(input, ' ');
+	ft_putstr_fd("bf\n", 1);
+	cmd_arg = ft_split(joined, '\n');
+	ft_putstr_fd("aft\n", 1);
+	free(joined);
 	return (cmd_arg);
 }

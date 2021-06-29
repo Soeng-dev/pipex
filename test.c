@@ -111,11 +111,11 @@ int		main(int argc, char **argv, char **envp)
 //	free(ho);
 
 	char *arg[4];
-	arg[0] = "ls";
-	arg[1] = "./";
-	arg[2] = "srcs includes";
+	arg[0] = "grep";
+	arg[2] = NULL;//"a";
+	arg[1] = "srcs includes";
 	arg[3] = NULL;
-	execve("/bin/ls", arg, NULL);
+	execve("/usr/bin/grep", arg, NULL);
 
 //	char *pre = NULL;
 //	char *post = "abcd";
