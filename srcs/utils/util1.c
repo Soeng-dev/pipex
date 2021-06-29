@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 18:12:16 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/26 20:36:02 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/29 20:45:11 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ int		open_file(char *name, int mode)
 	return (fd);
 }
 
-void	init_pipe(int *pipeline, int input_fd)
+void	init_pipe(int (*pipes)[2], int input_fd)
 {
-
-	if (pipe(pipeline) < 0)
+	if (pipe(pipes[0]) < 0)
+		perror_exit("Error : pipe");
+	if (pipe(pipes[1]) < 0)
 		perror_exit("Error : pipe");
 	if (input_fd >= 0)
-		transfer_data(input_fd, pipeline[WR]);
+		transfer_data(input_fd, pipes[PTOC][WR]);
 	return ;
 }

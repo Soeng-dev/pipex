@@ -6,15 +6,18 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 21:37:46 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/26 17:39:49 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/29 20:22:02 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VARS_H
 # define VARS_H
 
+# define PTOC	0
+# define CTOP	1
 # define RD		0
 # define WR		1
+
 # define STDOUT	1
 # define CHILD	0
 
