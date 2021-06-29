@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util1.c                                            :+:      :+:    :+:   */
+/*   util2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 20:02:56 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/26 20:03:59 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/29 16:57:42 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,16 @@ void	free_char_ptr2d(char **ptr2d)
 
 void	transfer_data(int fd_src, int fd_target)
 {
-	char	line[33];
 	int		read_result;
+	char	buf[33];
 
-	line[32] = 0;
+	buf[32] = 0;
 	read_result = 1;
-	while (read_result != 0)
+	while (read_result > 0)
 	{
-		read_result = read(fd_src, line, 32);
-		ft_putstr_fd(line, fd_target);
+		read_result = read(fd_src, buf, 32);
+		buf[read_result] = 0;
+		ft_putstr_fd(buf, fd_target);
 	}
 	return ;
 }

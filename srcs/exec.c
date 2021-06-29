@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 22:56:55 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/29 16:25:00 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/29 16:32:06 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	exec_cmd(char *cmd, char **envp, int *pipeline)
 		perror_exit("Error : fork");
 	if (pid == CHILD)
 	{
-		ft_putstr_fd("here\n", 1);
 		path = find_cmdpath(cmd, envp);
 		cmd_arg = read_cmd_arg(pipeline[RD]);
 		ft_putstr_fd("arg fin\n", 1);//test
