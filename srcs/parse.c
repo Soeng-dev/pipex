@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:37:02 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/28 22:02:49 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/29 16:29:40 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char	*find_cmdpath(char *cmd, char **envp)
 {
 	char	**path_list;
 	char	**to_free;
+	char	**to_find;
 	char	*path;
 
 	while (*envp)
@@ -68,14 +69,16 @@ char	*find_cmdpath(char *cmd, char **envp)
 		++envp;
 	}
 	path_list = ft_split(*envp + 5, ':');
+	to_find = ft_split(cmd, ' ');
 	to_free = path_list;
 	while (*path_list)
 	{
-		if (is_correct_path(*path_list, cmd))
+		if (is_correct_path(*path_list, *to_find))
 			break;
 		++path_list;
 	}
 	path = ft_strdup(*path_list);
+	free_char_ptr2d(to_find);
 	free_char_ptr2d(to_free);
 	return (path);
 }
@@ -93,7 +96,6 @@ char	**read_cmd_arg(int fd)
 		new = NULL;
 		if (get_next_line(fd, &new) == END)
 			break;
-		ft_putnbr_fd(ft_strlen(new), 1);
 		input = ft_strjoin(input, new);
 //		ft_putstr_fd("input : ",1 );
 //		ft_putendl_fd(input, 1);//test

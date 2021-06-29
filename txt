@@ -1,7 +1,0 @@
-This is my text for test
-
-hi my name 
-is 
-seongyong
-
-srcs

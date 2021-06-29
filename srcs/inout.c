@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 20:08:24 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/22 14:02:41 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/29 16:29:01 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	init_inout(t_inout *inout, t_arg *arg)
 		inout->out.o_flag = O_RDWR;
 	else
 		inout->out.o_flag = O_RDWR | O_CREAT | O_TRUNC;
-	inout->out.fd = open_file(arg->vec[arg->cnt - 1], inout->out.o_flag);
+	if (arg->cnt > 4)	
+		inout->out.fd = open_file(arg->vec[arg->cnt - 1], inout->out.o_flag);
 	if (inout->out.o_flag == O_RDWR)
 	{
 	//when bonus, move filepointer to the last line use while loop and read(SIZE_MAX)
