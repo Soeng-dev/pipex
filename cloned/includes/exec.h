@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 16:45:13 by soekim            #+#    #+#             */
-/*   Updated: 2021/07/01 16:47:38 by soekim           ###   ########.fr       */
+/*   Updated: 2021/07/01 22:53:21 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 # include "parse.h"
 
 void	exec_arg(t_arg *arg, char **envp, t_inout *inout);
-void	exec_cmd(char *cmd, char **envp, int **pipes);
+void	exec_cmd(char *cmd, char **envp, int (*pipes)[2]);
 
 #endif

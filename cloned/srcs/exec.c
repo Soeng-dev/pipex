@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 22:56:55 by soekim            #+#    #+#             */
-/*   Updated: 2021/07/01 20:42:23 by soekim           ###   ########.fr       */
+/*   Updated: 2021/07/01 23:43:03 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_pipe(int (*pipes)[2])
 void	exec_arg(t_arg *arg, char **envp, t_inout *inout)
 {
 	int		i;
+	int		input;
 	int		cmd_num;
 	int		pipes[2][2];
 
@@ -33,25 +34,25 @@ void	exec_arg(t_arg *arg, char **envp, t_inout *inout)
 		cmd_num = arg->cnt - 3;
 	else
 		return ;
-	printf("cmd num : %d\n", cmd_num);
-	init_pipe(pipes);
-	transfer_data(inout->in.fd, pipes[PTOC][WR]);
+	input = inout->in.fd;
 	i = 0;
-	while (1)
+	arg->vec += 2;
+	while (i < cmd_num)
 	{
-		ft_putstr_fd("while\n",1);
-		exec_cmd(arg->vec[i + 2], envp, pipes[i]);
-		if (i > cmd_num - 1)
-			break ;
-		dup2(pipes[CTOP][RD], pipes[PTOC][WR]);
+		printf("loop i %d	cmd %d\n", i, cmd_num);
+		init_pipe(pipes);
+		transfer_data(input, pipes[PTOC][WR]);
+		exec_cmd(arg->vec[i], envp, pipes);
+		close(input);
+		input = pipes[CTOP][RD];
+		close(pipes[PTOC][WR]);
 		++i;
 	}
-	ft_putstr_fd("executed\n",1);
-	transfer_data(pipes[i][CTOP][RD], inout->out.fd);
+	transfer_data(input, inout->out.fd);
 	return ;
 }
 
-void	exec_cmd(char *cmd, char **envp, int **pipes)
+void	exec_cmd(char *cmd, char **envp, int (*pipes)[2])
 {
 	int		pid;
 	char	*path;
@@ -60,6 +61,12 @@ void	exec_cmd(char *cmd, char **envp, int **pipes)
 	pid = fork();
 	if (pid < 0)
 		perror_exit("Error : fork");
+	if (pid != CHILD)
+	{
+		close(pipes[PTOC][RD]);
+		close(pipes[CTOP][WR]);
+//		waitpid(CHILD, NULL, 0);
+	}
 	if (pid == CHILD)
 	{
 		close(pipes[PTOC][WR]);
@@ -69,15 +76,10 @@ void	exec_cmd(char *cmd, char **envp, int **pipes)
 		cmd_arg[0] = ft_strdup(cmd);
 		cmd_arg[1] = NULL;
 		dup2(pipes[PTOC][RD], STDIN);
+		printf("cmd start\n");
 		dup2(pipes[CTOP][WR], STDOUT);
-		execve(path, cmd_arg, NULL);
+		execve(path, cmd_arg, envp);
 		exit(0);
-	}
-	else
-	{
-		close(pipes[PTOC][RD]);
-		close(pipes[CTOP][WR]);
-		waitpid(CHILD, NULL, 0);
 	}
 	return ;
 }

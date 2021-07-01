@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:37:02 by soekim            #+#    #+#             */
-/*   Updated: 2021/07/01 17:51:29 by soekim           ###   ########.fr       */
+/*   Updated: 2021/07/01 23:02:15 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char	*find_cmdpath(char *cmd, char **envp)
 	}
 	path_list = ft_split(*envp + 5, ':');
 	to_find = ft_split(cmd, ' ');
+//	printf("cmd in find path %s\n", cmd);
 	to_free = path_list;
 	while (*path_list)
 	{
