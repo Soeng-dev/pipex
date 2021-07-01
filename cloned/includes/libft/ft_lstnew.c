@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 14:44:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/30 10:08:12 by soekim           ###   ########.fr       */
+/*   Created: 2020/11/21 18:22:36 by soekim            #+#    #+#             */
+/*   Updated: 2020/11/21 18:35:58 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+t_list	*ft_lstnew(void *content)
 {
-	size_t	len;
+	t_list	*newlst;
 
-	if (!s)
-		return (0);
-	len = 0;
-	while (*(s++))
-		len++;
-	return (len);
+	if (!(newlst = (t_list *)malloc(sizeof(t_list))))
+		return (NULL);
+	newlst->content = content;
+	newlst->next = NULL;
+	return (newlst);
 }

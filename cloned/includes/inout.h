@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   inout.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 14:44:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/30 10:08:12 by soekim           ###   ########.fr       */
+/*   Created: 2021/06/26 16:50:37 by soekim            #+#    #+#             */
+/*   Updated: 2021/06/26 17:08:21 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef INOUT_H
+# define INOUT_H
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
+# include "vars.h"
+# include "utils.h"
 
-	if (!s)
-		return (0);
-	len = 0;
-	while (*(s++))
-		len++;
-	return (len);
-}
+# include <fcntl.h>
+
+void	init_inout(t_inout *inout, t_arg *arg);
+
+#endif

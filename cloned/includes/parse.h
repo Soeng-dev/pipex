@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 14:44:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/30 10:08:12 by soekim           ###   ########.fr       */
+/*   Created: 2021/06/26 17:34:41 by soekim            #+#    #+#             */
+/*   Updated: 2021/06/28 17:45:38 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PARSE_H
+# define PARSE_H
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
+# include "utils.h"
 
-	if (!s)
-		return (0);
-	len = 0;
-	while (*(s++))
-		len++;
-	return (len);
-}
+void	ls_grep_sh(char *path, char *cmd);
+int		is_correct_path(char *path, char *cmd);
+char	*find_cmdpath(char *cmd, char **envp);
+char	**read_cmd_arg(int fd);
+
+#endif

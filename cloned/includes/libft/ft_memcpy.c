@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 14:44:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/30 10:08:12 by soekim           ###   ########.fr       */
+/*   Created: 2020/11/09 16:51:49 by soekim            #+#    #+#             */
+/*   Updated: 2020/11/19 16:42:17 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	size_t	len;
+	char	*dst_tab;
+	char	*src_tab;
+	int		i;
 
-	if (!s)
-		return (0);
-	len = 0;
-	while (*(s++))
-		len++;
-	return (len);
+	if (!dst && !src)
+		return ((void *)0);
+	i = (int)n;
+	dst_tab = (char *)dst;
+	src_tab = (char *)src;
+	while (--i >= 0)
+		dst_tab[i] = src_tab[i];
+	return (dst);
 }

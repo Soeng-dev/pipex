@@ -1,52 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vars.h                                             :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/17 21:37:46 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/30 14:45:48 by soekim           ###   ########.fr       */
+/*   Created: 2021/06/18 19:43:55 by soekim            #+#    #+#             */
+/*   Updated: 2021/07/01 15:24:22 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VARS_H
-# define VARS_H
+#ifndef UTILS_H
+# define UTILS_H
 
-# define PTOC	0
-# define CTOP	1
-# define RD		0
-# define WR		1
+# include <stdlib.h>
+# include <fcntl.h>
 
-# define STDIN	0
-# define STDOUT	1
-
-# define CHILD	0
-
-# define TRUE	1
-# define FALSE	0
-
+# include "vars.h"
 # include "libft/libft.h"
+# include "get_next_line.h"
 
-struct	s_arg
-{
-	int		cnt;
-	char	**vec;
-};
-typedef struct	s_arg	t_arg;
-
-struct	s_file
-{
-	int		fd;
-	int		o_flag;
-};
-typedef struct	s_file	t_file;
-
-struct	s_inout
-{
-	t_file	in;
-	t_file	out;
-};
-typedef struct s_inout	t_inout;
+int		strdelcpy(char *s1, char *s2, int del);
+int		open_file(char *name, int mode);
+void	free_char_ptrarr(char **ptrarr);
+void	free_char_ptr2d(char **ptr2d);
+void	transfer_data(int fd_src, int fd_target);
+void	perror_exit(char *str);
+int		***get_pipes(int cmd_num);
 
 #endif

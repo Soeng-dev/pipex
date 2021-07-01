@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:37:02 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/30 14:27:52 by soekim           ###   ########.fr       */
+/*   Updated: 2021/07/01 17:51:29 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ls_grep_sh(char *path, char *cmd)
 		arg[2] = cmd;
 		arg[3] = NULL;
 		execve("ls_grep.sh", arg, NULL);
-		exit(0);
 	}
 	waitpid(CHILD, NULL, 0);
 	return ;
@@ -61,8 +60,8 @@ char	*find_cmdpath(char *cmd, char **envp)
 	char	**path_list;
 	char	**to_free;
 	char	**to_find;
-	char	*path;
 	char	*to_cat;
+	char	*path;
 
 	while (*envp)
 	{
@@ -73,16 +72,18 @@ char	*find_cmdpath(char *cmd, char **envp)
 	path_list = ft_split(*envp + 5, ':');
 	to_find = ft_split(cmd, ' ');
 	to_free = path_list;
-	to_cat = ft_strjoin("/", *ft_split(cmd, ' '));
 	while (*path_list)
 	{
 		if (is_correct_path(*path_list, *to_find))
-			path = ft_strjoin(*path_list, to_cat);
+			break;
 		++path_list;
 	}
+	to_cat = ft_strjoin("/", cmd);
+	path = ft_strjoin(*path_list, to_cat);
+	free(to_cat);
+	ft_putendl_fd(path, 1);//test
 	free_char_ptr2d(to_find);
 	free_char_ptr2d(to_free);
-	free(to_cat);
 	return (path);
 }
 
@@ -98,12 +99,15 @@ char	**read_cmd_arg(int fd)
 	joined = NULL;
 	while (rdlen > 0)
 	{
+
+	ft_putstr_fd("started\n",1 );
 		rdlen = read(fd, buf, 255);
 		buf[rdlen] = 0;
 		joined = ft_strjoin(joined, buf);
 	}
+	ft_putstr_fd("bf\n", 1);
 	cmd_arg = ft_split(joined, '\n');
+	ft_putstr_fd("aft\n", 1);
 	free(joined);
-	
 	return (cmd_arg);
 }

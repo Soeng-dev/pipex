@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 20:02:56 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/30 17:11:13 by soekim           ###   ########.fr       */
+/*   Updated: 2021/07/01 20:38:26 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,11 @@ void	transfer_data(int fd_src, int fd_target)
 
 	buf[32] = 0;
 	read_result = 1;
-
-	ft_putstr_fd("\ntransferring\n", 1);
 	while (read_result > 0)
 	{
 		read_result = read(fd_src, buf, 32);
-		ft_putnbr_fd(read_result,1);
-		write(1,"\n",1);
 		buf[read_result] = 0;
 		ft_putstr_fd(buf, fd_target);
-		ft_putendl_fd(buf, 1);
 	}
 	return ;
 }

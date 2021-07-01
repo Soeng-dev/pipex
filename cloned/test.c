@@ -11,20 +11,8 @@
 #include "includes/get_next_line.h"
 #include "includes/libft/libft.h"
 
-
-void	test_arrptr(int (*ptr)[2])
-{
-	printf("%p	%d	%d\n", ptr[0], ptr[0][0], ptr[0][1]);
-	printf("%p	%d	%d\n",ptr[1], ptr[1][0], ptr[1][1]);
-}
-
 int		main(int argc, char **argv, char **envp)
 {
-//	int arr[2][2];
-//	arr[0][0] = 0; arr[0][1] = 1;
-//	arr[1][0] = 10; arr[1][1] = 11;
-//	test_arrptr(arr);
-
 //	// test for pid when multi-forked
 //	int pid = fork();
 //
@@ -123,16 +111,14 @@ int		main(int argc, char **argv, char **envp)
 //	free(ho);
 
 	char *arg[4];
-	arg[0] = "ls";
+	arg[0] = "grep";
 	arg[2] = NULL;//"a";
-	arg[1] = "srcs";
+	arg[1] = "srcs includes";
 	arg[3] = NULL;
-	execve("/bin/ls", arg, NULL);
+	execve("/usr/bin/grep", arg, NULL);
 
 //	char *pre = NULL;
 //	char *post = "abcd";
 //	char *joined=ft_strjoin(pre, post);
-//
-
 	return (0);
 }

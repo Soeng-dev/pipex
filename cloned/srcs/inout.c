@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 20:08:24 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/30 15:33:45 by soekim           ###   ########.fr       */
+/*   Updated: 2021/06/30 17:39:03 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_inout(t_inout *inout, t_arg *arg)
 		inout->out.fd = open_file(arg->vec[arg->cnt - 1], inout->out.o_flag);
 	else
 		inout->out.fd = STDOUT;
-	if (inout->out.o_flag == O_RDWR)
+	if (!ft_strcmp(arg->vec[1], "here_doc"))
 	{
 	//when bonus, move filepointer to the last line use while loop and read(SIZE_MAX)
 	}

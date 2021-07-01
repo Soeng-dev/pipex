@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 14:44:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/30 10:08:12 by soekim           ###   ########.fr       */
+/*   Created: 2021/06/17 16:21:29 by soekim            #+#    #+#             */
+/*   Updated: 2021/06/26 20:19:24 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/pipex.h"
 
-size_t	ft_strlen(const char *s)
+int		main(int argc, char **argv, char **envp)
 {
-	size_t	len;
+	t_arg	arg;
+	t_inout	inout;
 
-	if (!s)
+	if (argc <= 2)
 		return (0);
-	len = 0;
-	while (*(s++))
-		len++;
-	return (len);
+	arg.cnt = argc;
+	arg.vec = argv;
+	
+	init_inout(&inout, &arg);
+	
+	ft_putstr_fd("inouted\n", 1);
+	exec_arg(&arg, envp, &inout);
+
+	//redirection result of pipex and exec_cmd to the out.fd
+	close(inout.out.fd);
+	return (0);
 }

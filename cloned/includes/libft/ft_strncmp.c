@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 14:44:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/30 10:08:12 by soekim           ###   ########.fr       */
+/*   Updated: 2020/11/22 18:25:51 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	len;
+	int				i;
+	unsigned char	*c1;
+	unsigned char	*c2;
 
-	if (!s)
+	i = (int)n;
+	c1 = (unsigned char *)s1;
+	c2 = (unsigned char *)s2;
+	while (--i >= 0 && *c1 == *c2 && *c1 != '\0' && *c2 != '\0')
+	{
+		c1++;
+		c2++;
+	}
+	if (i < 0)
 		return (0);
-	len = 0;
-	while (*(s++))
-		len++;
-	return (len);
+	return ((int)(*c1 - *c2));
 }

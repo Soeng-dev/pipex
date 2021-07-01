@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 14:44:51 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/30 10:08:12 by soekim           ###   ########.fr       */
+/*   Created: 2021/06/26 16:45:13 by soekim            #+#    #+#             */
+/*   Updated: 2021/07/01 16:47:38 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef EXEC_H
+# define EXEC_H
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
+# include <unistd.h>
 
-	if (!s)
-		return (0);
-	len = 0;
-	while (*(s++))
-		len++;
-	return (len);
-}
+# include "vars.h"
+# include "utils.h"
+# include "parse.h"
+
+void	exec_arg(t_arg *arg, char **envp, t_inout *inout);
+void	exec_cmd(char *cmd, char **envp, int **pipes);
+
+#endif

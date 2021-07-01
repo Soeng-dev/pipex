@@ -1,52 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vars.h                                             :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/17 21:37:46 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/30 14:45:48 by soekim           ###   ########.fr       */
+/*   Created: 2021/06/26 17:04:03 by soekim            #+#    #+#             */
+/*   Updated: 2021/06/26 17:37:01 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VARS_H
-# define VARS_H
+#ifndef PIPE_X_H
+# define PIPE_X_H
 
-# define PTOC	0
-# define CTOP	1
-# define RD		0
-# define WR		1
-
-# define STDIN	0
-# define STDOUT	1
-
-# define CHILD	0
-
-# define TRUE	1
-# define FALSE	0
-
+# include "exec.h"
+# include "inout.h"
+# include "utils.h"
+# include "vars.h"
+# include "parse.h"
+# include "get_next_line.h"
 # include "libft/libft.h"
-
-struct	s_arg
-{
-	int		cnt;
-	char	**vec;
-};
-typedef struct	s_arg	t_arg;
-
-struct	s_file
-{
-	int		fd;
-	int		o_flag;
-};
-typedef struct	s_file	t_file;
-
-struct	s_inout
-{
-	t_file	in;
-	t_file	out;
-};
-typedef struct s_inout	t_inout;
 
 #endif
