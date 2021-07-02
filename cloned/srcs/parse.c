@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:37:02 by soekim            #+#    #+#             */
-/*   Updated: 2021/07/02 15:38:49 by soekim           ###   ########.fr       */
+/*   Updated: 2021/07/02 16:43:57 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,24 @@ int		is_correct_path(char *path, char *cmd)
 
 char	**get_path_list(char **envp)
 {
-	while (*envp)
+	int		i;
+
+	i = 0;
+	while (envp[i])
 	{
-		if (!strdelcpy("PATH", *envp, '='))
+		if (!strdelcpy("PATH", envp[i], '='))
 			break ;
-		++envp;
+		++i;
 	}
-	return (ft_split(*envp + 5, ':'));
+	return (ft_split(envp[i] + 5, ':'));
+}
+
+void	cmd_not_found(char *cmd)
+{
+	write(1, "\n", 1);
+	ft_putstr_fd(cmd, 1);
+	ft_putstr_fd(": command not found\n", 1);
+	exit(0);
 }
 
 char	*find_cmdpath(char *cmd, char **envp)
@@ -82,6 +93,8 @@ char	*find_cmdpath(char *cmd, char **envp)
 			break ;
 		++path_list;
 	}
+	if (!(*path_list))
+		cmd_not_found(cmd);
 	to_cat = ft_strjoin("/", *to_find);
 	path = ft_strjoin(*path_list, to_cat);
 	free(to_cat);
