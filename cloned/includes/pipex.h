@@ -6,12 +6,12 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 17:04:03 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/26 17:37:01 by soekim           ###   ########.fr       */
+/*   Updated: 2021/07/02 15:41:26 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPE_X_H
-# define PIPE_X_H
+#ifndef PIPEX_H
+# define PIPEX_H
 
 # include "exec.h"
 # include "inout.h"

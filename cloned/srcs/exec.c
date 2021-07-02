@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 22:56:55 by soekim            #+#    #+#             */
-/*   Updated: 2021/07/02 15:22:09 by soekim           ###   ########.fr       */
+/*   Updated: 2021/07/02 15:28:20 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	exec_arg(t_arg *arg, char **envp, t_inout *inout)
 		++i;
 	}
 	transfer_data(input, inout->out.fd);
-	return ;
 }
 
 void	exec_cmd(char *cmd, char **envp, int (*pipes)[2])

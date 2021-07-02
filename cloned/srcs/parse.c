@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:37:02 by soekim            #+#    #+#             */
-/*   Updated: 2021/07/02 15:20:49 by soekim           ###   ########.fr       */
+/*   Updated: 2021/07/02 15:38:49 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	**get_path_list(char **envp)
 	while (*envp)
 	{
 		if (!strdelcpy("PATH", *envp, '='))
-			break;
+			break ;
 		++envp;
 	}
 	return (ft_split(*envp + 5, ':'));
@@ -79,7 +79,7 @@ char	*find_cmdpath(char *cmd, char **envp)
 	while (*path_list)
 	{
 		if (is_correct_path(*path_list, *to_find))
-			break;
+			break ;
 		++path_list;
 	}
 	to_cat = ft_strjoin("/", *to_find);

@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 21:37:46 by soekim            #+#    #+#             */
-/*   Updated: 2021/07/01 16:57:48 by soekim           ###   ########.fr       */
+/*   Updated: 2021/07/02 15:39:49 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ struct	s_arg
 	int		cnt;
 	char	**vec;
 };
-typedef struct	s_arg	t_arg;
+typedef struct s_arg	t_arg;
 
 struct	s_file
 {
 	int		fd;
 	int		o_flag;
 };
-typedef struct	s_file	t_file;
+typedef struct s_file	t_file;
 
 struct	s_inout
 {
