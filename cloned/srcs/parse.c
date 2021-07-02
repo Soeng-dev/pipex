@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:37:02 by soekim            #+#    #+#             */
-/*   Updated: 2021/07/01 23:45:59 by soekim           ###   ########.fr       */
+/*   Updated: 2021/07/02 15:20:49 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int		is_correct_path(char *path, char *cmd)
 	gnl_result = SUCCESS;
 	while (gnl_result == SUCCESS)
 	{
-	//test here
 		gnl_result = get_next_line(fd, &grepped);
 		if (!ft_strcmp(grepped, cmd))
 		{
@@ -55,6 +54,17 @@ int		is_correct_path(char *path, char *cmd)
 	return (FALSE);
 }
 
+char	**get_path_list(char **envp)
+{
+	while (*envp)
+	{
+		if (!strdelcpy("PATH", *envp, '='))
+			break;
+		++envp;
+	}
+	return (ft_split(*envp + 5, ':'));
+}
+
 char	*find_cmdpath(char *cmd, char **envp)
 {
 	char	**path_list;
@@ -63,14 +73,8 @@ char	*find_cmdpath(char *cmd, char **envp)
 	char	*to_cat;
 	char	*path;
 
-	while (*envp)
-	{
-		if (!strdelcpy("PATH", *envp, '='))
-			break;
-		++envp;
-	}
-	path_list = ft_split(*envp + 5, ':');
 	to_find = ft_split(cmd, ' ');
+	path_list = get_path_list(envp);
 	to_free = path_list;
 	while (*path_list)
 	{
@@ -81,33 +85,7 @@ char	*find_cmdpath(char *cmd, char **envp)
 	to_cat = ft_strjoin("/", *to_find);
 	path = ft_strjoin(*path_list, to_cat);
 	free(to_cat);
-	ft_putendl_fd(path, 1);//test
 	free_char_ptr2d(to_find);
 	free_char_ptr2d(to_free);
 	return (path);
-}
-
-char	**read_cmd_arg(int fd)
-{
-	char	buf[256];
-	char	**cmd_arg;
-	char	*joined;
-	int		rdlen;
-
-	buf[255] = 0;
-	rdlen = 1;
-	joined = NULL;
-	while (rdlen > 0)
-	{
-
-	ft_putstr_fd("started\n",1 );
-		rdlen = read(fd, buf, 255);
-		buf[rdlen] = 0;
-		joined = ft_strjoin(joined, buf);
-	}
-	ft_putstr_fd("bf\n", 1);
-	cmd_arg = ft_split(joined, '\n');
-	ft_putstr_fd("aft\n", 1);
-	free(joined);
-	return (cmd_arg);
 }
