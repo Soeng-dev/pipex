@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 19:43:55 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/29 20:44:35 by soekim           ###   ########.fr       */
+/*   Updated: 2021/07/01 15:24:22 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ void	free_char_ptrarr(char **ptrarr);
 void	free_char_ptr2d(char **ptr2d);
 void	transfer_data(int fd_src, int fd_target);
 void	perror_exit(char *str);
-void	init_pipe(int (*pipes)[2], int input_fd);
+int		***get_pipes(int cmd_num);
 
 #endif

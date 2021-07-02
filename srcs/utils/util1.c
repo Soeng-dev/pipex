@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 18:12:16 by soekim            #+#    #+#             */
-/*   Updated: 2021/06/30 14:27:56 by soekim           ###   ########.fr       */
+/*   Updated: 2021/07/02 16:34:22 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,8 @@ int		open_file(char *name, int mode)
 
 	if (!name)
 		return (-1);
-	fd = open(name, mode);
+	fd = open(name, mode, 0644);
 	if (fd < 0)
-		perror_exit("Error : open");
+		exit(0);
 	return (fd);
-}
-
-void	init_pipe(int (*pipes)[2], int input_fd)
-{
-	if (pipe(pipes[0]) < 0)
-		perror_exit("Error : pipe");
-	if (pipe(pipes[1]) < 0)
-		perror_exit("Error : pipe");
-	if (input_fd >= 0)
-		transfer_data(input_fd, pipes[PTOC][WR]);
-	return ;
 }
