@@ -68,14 +68,6 @@ char	**get_path_list(char **envp)
 	return (ft_split(envp[i] + 5, ':'));
 }
 
-void	cmd_not_found(char *cmd)
-{
-	write(1, "\n", 1);
-	ft_putstr_fd(cmd, 1);
-	ft_putstr_fd(": command not found\n", 1);
-	exit(0);
-}
-
 char	*find_cmdpath(char *cmd, char **envp)
 {
 	char	**path_list;
@@ -84,6 +76,8 @@ char	*find_cmdpath(char *cmd, char **envp)
 	char	*to_cat;
 	char	*path;
 
+	if (!ft_strncpy(cmd, "./", 2))
+		return (cmd);
 	to_find = ft_split(cmd, ' ');
 	path_list = get_path_list(envp);
 	to_free = path_list;

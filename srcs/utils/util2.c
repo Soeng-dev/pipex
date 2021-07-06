@@ -44,3 +44,11 @@ void	transfer_data(int fd_src, int fd_target)
 	}
 	return ;
 }
+
+void	cmd_not_found(char *cmd)
+{
+	write(1, "\n", 1);
+	ft_putstr_fd(cmd, 1);
+	ft_putstr_fd(": command not found\n", 1);
+	exit(0);
+}

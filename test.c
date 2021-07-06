@@ -110,12 +110,13 @@ int		main(int argc, char **argv, char **envp)
 //	printf("ft_strlen %d, cont :%s\n", ft_strlen(ho), ho);
 //	free(ho);
 
-	char *arg[4];
-	arg[0] = "grep";
-	arg[2] = NULL;//"a";
-	arg[1] = "srcs includes";
-	arg[3] = NULL;
-	execve("/usr/bin/grep", arg, NULL);
+	char *arg[5];
+	arg[0] = "./prt test txt for hi";
+	arg[1] = "hi";
+	arg[2] = "my";//"a";
+	arg[3] = "name";
+	arg[4] = NULL;
+	execve("./prt", arg, NULL);
 
 //	char *pre = NULL;
 //	char *post = "abcd";
