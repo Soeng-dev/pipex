@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:37:02 by soekim            #+#    #+#             */
-/*   Updated: 2021/07/09 14:24:05 by soekim           ###   ########.fr       */
+/*   Updated: 2021/07/09 16:16:43 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	*find_cmdpath(char *cmd, char **envp)
 		++path_list;
 	}
 	if (!(*path_list))
-		cmd_not_found(cmd);
+		cmd_not_found(*to_find);
 	to_cat = ft_strjoin("/", *to_find);
 	path = ft_strjoin(*path_list, to_cat);
 	free(to_cat);
