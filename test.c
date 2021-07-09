@@ -111,12 +111,12 @@ int		main(int argc, char **argv, char **envp)
 //	free(ho);
 
 	char *arg[5];
-	arg[0] = "./prt test txt for hi";
+	arg[0] = "../pipex/prt why this not print?";
 	arg[1] = "hi";
 	arg[2] = "my";//"a";
 	arg[3] = "name";
 	arg[4] = NULL;
-	execve("./prt", arg, NULL);
+	execve("../pipex/prt", arg, NULL);
 
 //	char *pre = NULL;
 //	char *post = "abcd";

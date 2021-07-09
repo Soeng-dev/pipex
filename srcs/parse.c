@@ -6,7 +6,7 @@
 /*   By: soekim <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 22:37:02 by soekim            #+#    #+#             */
-/*   Updated: 2021/07/02 16:43:57 by soekim           ###   ########.fr       */
+/*   Updated: 2021/07/09 14:24:05 by soekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ char	*find_cmdpath(char *cmd, char **envp)
 	char	*to_cat;
 	char	*path;
 
-	if (!ft_strncpy(cmd, "./", 2))
-		return (cmd);
+	if (!ft_strncmp(cmd, "./", 2) || !ft_strncmp(cmd, "../", 3))
+		return (*ft_split(cmd, ' '));
 	to_find = ft_split(cmd, ' ');
 	path_list = get_path_list(envp);
 	to_free = path_list;
