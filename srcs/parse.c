@@ -30,7 +30,7 @@ void	ls_grep_sh(char *path, char *cmd)
 	return ;
 }
 
-int		is_correct_path(char *path, char *cmd)
+int	is_correct_path(char *path, char *cmd)
 {
 	int		gnl_result;
 	char	*grepped;
