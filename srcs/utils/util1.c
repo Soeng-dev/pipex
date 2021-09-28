@@ -12,7 +12,7 @@
 
 #include "../../includes/utils.h"
 
-int		strdelcpy(char *s1, char *s2, int del)
+int	strdelcpy(char *s1, char *s2, int del)
 {
 	while (*s1 && *s2 && *s1 != del && *s2 != del)
 	{
@@ -33,7 +33,7 @@ void	perror_exit(char *str)
 	exit(1);
 }
 
-int		open_file(char *name, int mode)
+int	open_file(char *name, int mode)
 {
 	int		fd;
 
