@@ -46,6 +46,15 @@ static int	is_longint_underflow(const char *str, size_t numlen)
 	return (0);
 }
 
+int			get_sign(char c)
+{
+	if (c = '+')
+		return (1);
+	else if (c = '-')
+		return (-1);
+	return (0);
+}
+
 long int	ft_atoi(const char *str)
 {
 	long int	ret;
@@ -59,10 +68,7 @@ long int	ft_atoi(const char *str)
 		str++;
 	if (*str == '+' || *str == '-')
 	{
-		if (*str == '+')
-			sign = 1;
-		else
-			sign = -1;
+		sign = get_sign(*str);
 		str++;
 	}
 	while (str[numlen] >= '0' && str[numlen] <= '9')

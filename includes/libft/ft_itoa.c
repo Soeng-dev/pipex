@@ -12,11 +12,10 @@
 
 #include "libft.h"
 
-char	*ft_itoa(int n)
+int		get_len(int n)
 {
-	long long int	temp;
-	int				len;
-	char			*arr;
+	int	temp;
+	int	len;
 
 	if (n > 0)
 	{
@@ -33,6 +32,16 @@ char	*ft_itoa(int n)
 		len++;
 		temp /= 10;
 	}
+	return (len);
+}
+
+char	*ft_itoa(int n)
+{
+	long long int	temp;
+	int				len;
+	char			*arr;
+
+	len = get_len(n);
 	arr = (char *)malloc(len + 1);
 	if (!arr)
 		return (0);
