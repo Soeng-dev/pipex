@@ -19,7 +19,8 @@ void	*ft_calloc(size_t count, size_t size)
 	char			*tab;
 
 	i = (int)count * (int)size;
-	if (!(memory = malloc(i)))
+	memory = malloc(i);
+	if (!memory)
 		return (0);
 	tab = (char *)memory;
 	while (--i >= 0)

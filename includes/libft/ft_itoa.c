@@ -18,17 +18,32 @@ char	*ft_itoa(int n)
 	int				len;
 	char			*arr;
 
-	temp = (n > 0) ? (long long int)n : -(long long int)(n);
-	len = (n > 0) ? 0 : 1;
+	if (n > 0)
+	{
+		temp = (long long int)n;
+		len = 0;
+	}
+	else
+	{
+		temp = -(long long int)n;
+		len = 1;
+	}
 	while (temp != 0)
 	{
 		len++;
 		temp /= 10;
 	}
-	if (!(arr = (char *)malloc(len + 1)))
+	arr = (char *)malloc(len + 1);
+	if (!arr)
 		return (0);
-	arr[0] = (n < 0) ? '-' : '0';
-	temp = (n < 0) ? -(long long int)n : (long long int)n;
+	if (n < 0)
+		arr[0] = '-';
+	else
+		arr[0] = '0';
+	if (n < 0)
+		temp = -(long long int)n;
+	else
+		temp = (long long int)n;
 	arr[len] = '\0';
 	while (temp > 0)
 	{

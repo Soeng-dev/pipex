@@ -59,7 +59,10 @@ long int	ft_atoi(const char *str)
 		str++;
 	if (*str == '+' || *str == '-')
 	{
-		sign = (*str == '-') ? (-1) : (1);
+		if (*str == '+')
+			sign = 1;
+		else
+			sign = -1;
 		str++;
 	}
 	while (str[numlen] >= '0' && str[numlen] <= '9')
