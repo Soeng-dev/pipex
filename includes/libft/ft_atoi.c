@@ -46,11 +46,11 @@ static int	is_longint_underflow(const char *str, size_t numlen)
 	return (0);
 }
 
-int			get_sign(char c)
+int	get_sign(char c)
 {
-	if (c = '+')
+	if (c == '+')
 		return (1);
-	else if (c = '-')
+	else if (c == '-')
 		return (-1);
 	return (0);
 }
