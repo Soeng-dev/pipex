@@ -12,10 +12,10 @@
 
 #include "../../includes/get_next_line.h"
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
-	static char *next;
-	static char	buffer[BUFFER_SIZE + 1];
+	static	char *next;
+	static	char	buffer[BUFFER_SIZE + 1];
 	char		*temp;
 	int			result;
 

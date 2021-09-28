@@ -38,7 +38,7 @@ char	*ft_strncpy(char *dst, const char *src, int len)
 	return (dst);
 }
 
-int		strdel_len(char *s, char delimiter)
+int	strdel_len(char *s, char delimiter)
 {
 	int		len;
 
@@ -53,7 +53,7 @@ int		strdel_len(char *s, char delimiter)
 	return (len);
 }
 
-int		strcat_del(char **line, char *to_catenate, char delimiter)
+int	strcat_del(char **line, char *to_catenate, char delimiter)
 {
 	int		cat_len;
 	char	*tab;
@@ -62,7 +62,8 @@ int		strcat_del(char **line, char *to_catenate, char delimiter)
 	if (!to_catenate)
 		return (0);
 	cat_len = strdel_len(to_catenate, delimiter);
-	if (!(newstr = (char *)malloc(strdel_len(*line, '\0') + cat_len + 1)))
+	newstr = (char *)malloc(strdel_len(*line, '\0') + cat_len + 1);
+	if (!newstr)
 		return (ERROR);
 	tab = ft_strcpy(newstr, *line);
 	tab = ft_strncpy(tab, to_catenate, cat_len);
@@ -73,11 +74,11 @@ int		strcat_del(char **line, char *to_catenate, char delimiter)
 	return (cat_len);
 }
 
-int		get_oneline_and_next(char **next, char *buffer, char **temp, int fd)
+int	get_oneline_and_next(char **next, char *buffer, char **temp, int fd)
 {
-	int is_oneline;
-	int result;
-	int catlen;
+	int	is_oneline;
+	int	result;
+	int	catlen;
 
 	is_oneline = 0;
 	result = 1;
@@ -85,7 +86,8 @@ int		get_oneline_and_next(char **next, char *buffer, char **temp, int fd)
 	{
 		if (!(*next))
 		{
-			if ((result = read(fd, buffer, BUFFER_SIZE)) == ERROR)
+			result = read(fd, buffer, BUFFER_SIZE);
+			if (result == ERROR)
 				return (ERROR);
 			buffer[result] = '\0';
 			*next = buffer;
