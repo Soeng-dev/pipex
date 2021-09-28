@@ -19,20 +19,22 @@ static void	*lst_alloc_fails(t_list *head, void (*del)(void *))
 	return (NULL);
 }
 
-t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*head;
 	t_list	*curr;
 
 	if (!lst || !f || !del)
 		return (NULL);
-	if (!(head = ft_lstnew(f(lst->content))))
+	head = ft_lstnew(f(lst->content));
+	if (!head)
 		return (NULL);
 	curr = head;
 	while (lst->next)
 	{
 		lst = lst->next;
-		if (!(curr->next = ft_lstnew(f(lst->content))))
+		curr->next = ft_lstnew(f(lst->content));
+		if (!curr->next)
 			return (lst_alloc_fails(head, del));
 		curr = curr->next;
 	}

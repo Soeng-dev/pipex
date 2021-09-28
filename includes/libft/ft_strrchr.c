@@ -25,5 +25,5 @@ char	*ft_strrchr(const char *s, int c)
 			return (str);
 		str--;
 	}
-	return ((void*)0);
+	return ((void *)0);
 }

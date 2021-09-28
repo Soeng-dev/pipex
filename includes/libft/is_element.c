@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		is_element(const char *set, char c)
+int	is_element(const char *set, char c)
 {
 	if (!set)
 		return (-1);

@@ -65,7 +65,7 @@ static void	*splfree_null(char ***tofree, int n)
 	return ((void *)0);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	int		wordnum;
 	int		wordlen;
@@ -75,7 +75,8 @@ char		**ft_split(char const *s, char c)
 	if (!s)
 		return (0);
 	wordnum = wordcount(s, c);
-	if (!(ret = (char **)malloc((wordnum + 1) * sizeof(char *))))
+	ret = (char **)malloc((wordnum + 1) * sizeof(char *));
+	if (!ret)
 		return ((void *)0);
 	ret[wordnum] = (void *)0;
 	tab = (char *)s;
@@ -84,7 +85,8 @@ char		**ft_split(char const *s, char c)
 	{
 		while (*tab == c)
 			tab++;
-		if ((wordlen = wdalloc(tab, c, wordnum, ret)) < 0)
+		wordlen = wdalloc(tab, c, wordnum, ret);
+		if (wordlen < 0)
 			return (splfree_null(&ret, wordnum));
 		tab += wordlen;
 		wordnum++;

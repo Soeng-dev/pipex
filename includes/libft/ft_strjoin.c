@@ -23,12 +23,13 @@ static void	copy_and_move(char **target, char **src)
 	return ;
 }
 
-char		*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*ret;
 	char	*join;
 
-	if (!(join = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
+	join = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!join)
 		return (NULL);
 	ret = join;
 	if (s1)
